@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Matching Game</title>
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>Memory Game</h1>
+      <select id="chooser">
+        <option>Choose Level</option>
+        <option value="12">Novice (12 pairs)</option>
+        <option value="18">Aficionado (18 pairs)</option>
+        <option value="25">Professional (25 pairs)</option>
+        <option value="30">Ninja (30 pairs)</option>
+
+      </select>
+      <button>PLAY</button>
+      <div id="msg-box"></div>
+    </header>
+
+    <div id="app"></div>
+
+    <footer>
+      <span>Attempts: &nbsp; 0 &nbsp; Matches: &nbsp; 0 &nbsp; Average: &nbsp; 0.000 &nbsp; Score: &nbsp; 0 &nbsp;</span>
+      <span class="secs">00:00</span>
+    </footer>
+  </div>
+</body>
+
+</html>

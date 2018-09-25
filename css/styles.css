@@ -1,0 +1,88 @@
+body {
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1.25rem;
+  text-align: center;
+
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+header {
+  width: 90%;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding: 0;
+  margin: 5px auto;
+  text-align: center;
+  color: #455;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 1rem;
+}
+
+#chooser {
+  font-size: 1.25rem;
+  padding: 5px 10px;
+  margin: 0 0 0 35px;
+}
+
+button {
+  font-size: 1.25rem;
+  color: whitesmoke;
+  background: #576;
+  border-radius: 3px;
+  margin: 10px 60px;
+  width: 150px;
+  height: 40px;
+  padding: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#msg-box {
+  width: 600px;
+  margin-left: 180px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+#container {
+  background: #eee;
+  margin: 0 auto;
+  border-radius: 5px;
+  height: 100vh;
+  padding: 10px;
+}
+
+#app {
+  background-color: white;
+  margin: 0 auto;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  text-align: center;
+  padding: 10px;
+  width: 95%;
+  min-height: 70vh;
+}
+
+footer {
+  font-size: 1.5rem;
+  color: #455;
+  margin-top: 25px;
+  padding: 50px 200px;
+  letter-spacing: 3px;
+  text-align: center;
+  padding: 5px;
+}
+
+.secs {
+  color: red;
+}
