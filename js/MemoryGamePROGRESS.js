@@ -18,10 +18,13 @@ class MemoryGamePROGRESS {
         // footer that holds the score and timer
         this.footer = document.querySelector('footer')
         
+        // an array to keep track of choices for comparison (2 at a time)
+        this.choicesArr = []
+        
     } // close constructor()
             
     initGame() { // runs when user clicks PLAY
-        
+                
         // II. Scramble (Randomize) array
         this.arr.sort((a, b) => 0.5 - Math.random())
         
@@ -66,10 +69,102 @@ class MemoryGamePROGRESS {
             
         } // end image-maker loop
         
+        this.msgBox.innerHTML = 'HIDING ALL IMAGES IN <span id="countdown" style="color:red; font-size:2rem">5</span>'
+        
+        let countdownInterval = setInterval(function() {
+            
+            // update the countdown span tag number
+            let countdown = document.getElementById('countdown')
+            let countdownValue = countdown.innerHTML
+            countdownValue = Number(countdownValue)
+            countdownValue-- // reduce by 1 second
+            countdown.innerHTML = countdownValue
+            
+            // when the countdown reaches zero, stop it
+            if(countdownValue == 0) {
+                clearInterval(countdownInterval)
+            }
+            
+        }, 1000)
+        
+        // hide the images after 6.5 sec
+        setTimeout(function() {
+        
+//            // hide all images (set img src to blank.png)
+//            let imgArr = document.querySelectorAll('img')
+//            for(let i = 0; i < imgArr.length; i++) {
+//                imgArr[i].src = "images/blank.png"
+//            }
+//          // this also hides all pics, w/o first "grabbing them" from DOM:
+            for(let i = 0; i < gameArr.length; i++) {
+                this.app.children[i].src = "images/blank.png"
+            }
+        
+        }, 6500) // countdown briefly reads "0" before all pics are hidden 
+
     } // end initGame()
     
-    showPic() {
-        alert("Name: " + event.target.name + " ID: " + event.target.id)
+    showPic() { // runs on any image click
+        
+        // restore JPG as source of just-clicked img element:
+        event.target.src = "images/final/200x200/" + event.target.name + ".jpg"
+        
+        this.choicesArr.push(event.target) // push current img element into array
+        
+        // IF array contains 2 items, we need to see if they match:
+        if(this.choicesArr.length == 2) {
+                        
+            // Do the image names match? ("cat" == "cat")..?
+            if(this.choicesArr[0].name == this.choicesArr[1].name) {
+                
+                // The names match, so great! But..
+                // IF ID's also match, that's bad.. means it's the same item twice
+                if(this.choicesArr[0].id == this.choicesArr[1].id) {
+                    
+                    // Player clicked the same pic twice! Hide the first pic in the array. Since both pics are the same, we only need to hide one ...
+                    
+                    this.msgBox.innerHTML = '<span style="color:red">Oops! You Clicked the <br/>Same Pic Twice!</span>'
+
+                    setTimeout(() => { // wait before hiding twice-clicked pic
+                        this.choicesArr[0].src = "images/blank.png"
+                        this.msgBox.innerHTML = 'Please Try again!'
+                        this.choicesArr = []
+                    }, 750)
+
+                } else { // Names match, but ID's don't--great! That's a Match!
+                   
+                    // Don't hide pics. Leave them visible. Give positive feedback:
+                    this.msgBox.innerHTML = "Congrats! That's a Match!"
+                    this.choicesArr = []
+                   
+                } // end if(this.choicesArr[0].id == this.choicesArr[1].id)
+                
+            } else { // names do not match ("cat" != "car"), so hide them both
+                
+                // after delay, hide the mismatch, first one pic, then the other
+                // must use fat-arrow for setTimeout or it won't work
+                this.msgBox.innerHTML = 'Oops! Try Again!'
+                
+                // wait before hiding 1st pic
+                setTimeout(() => { 
+                    
+                    this.choicesArr[0].src = "images/blank.png"
+                    
+                }, 750)
+
+                // wait a little longer before hiding 2nd pic
+                setTimeout(() => { 
+                    
+                    this.choicesArr[1].src = "images/blank.png"
+                    this.choicesArr = []
+                    
+                }, 1250)
+
+                              
+            } // end if(this.choicesArr[0].name == this.choicesArr[1].name)
+            
+        } // end if(this.choicesArr.length == 2)
+        
     } // end showPic()
     
 } // close class MemoryGame
